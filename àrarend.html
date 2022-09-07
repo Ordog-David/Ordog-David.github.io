@@ -1,0 +1,217 @@
+
+<HTML>
+<HEAD>
+	<title>SG iDiák</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/demos.css" media="screen" type="text/css">
+	<script type="text/javascript" src="js/menu-for-applications.js"></script>
+	<style type="text/css">
+	body{
+		margin:0px;
+		text-align:center;
+	}
+	#mainContentainer{
+		width:100%;
+		margin:0 auto;
+		text-align:left;
+	}
+	#mainContent{
+		border:1px solid #000;
+	}
+	#textContent{
+		height:400px;
+		overflow:auto;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#menuDiv{
+		width:100%;
+		overflow:hidden;
+	}
+
+	</style>
+</head>
+<body><div id="mainContentainer"><div id="mainContent"><ul id="menuModel" style="display:none"><li id="1"><a href="#">Jegyek</a>
+<ul width="200">
+<li id="5"><a href="index.php?modul=bizonyitvany">Bizonyítvány</a></li>
+<li id="3"><a href="index.php?modul=jegyek&melyik=ido">Időrendben</a></li>
+<li id="2"><a href="index.php?modul=jegytabla">Naplókivonatként</a></li>
+<li id="4"><a href="index.php?modul=jegyek&melyik=targy">Tárgyak szerint</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="6"><a href="#">Hiányzások</a>
+<ul width="200">
+<li id="8"><a href="index.php?modul=hianyzas">Hiányzások</a></li>
+<li id="7"><a href="index.php?modul=igazolas">Igazolások</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="10"><a href="index.php?modul=dicser">Dicséretek, büntetések</a>
+<ul width="200">
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="11"><a href="#">Jelentkezések</a>
+<ul width="200">
+<li id="173"><a href="index.php?modul=kozpartner">Közösségi partnerek</a></li>
+<li id="12"><a href="index.php?modul=fakt&muvelet=megmutat">Fakultáció</a></li>
+<li id="13"><a href="index.php?modul=fakt&muvelet=megrendel">-jelentkezés nyomtatása</a></li>
+<li id="14"><a href="index.php?modul=szakkor&muvelet=megmutat">Szakkör</a></li>
+<li id="15"><a href="index.php?modul=szakkor&muvelet=megrendel">-jelentkezés nyomtatása</a></li>
+<li id="16"><a href="index.php?modul=verseny&muvelet=megmutat">Verseny</a></li>
+<li id="17"><a href="index.php?modul=verseny&muvelet=megrendel">-jelentkezés nyomtatása</a></li>
+<li id="167"><a href="index.php?modul=kerdoivvalasz">Elbírált kérdőívek</a></li>
+<li id="163"><a href="index.php?modul=kerdoiv">Kérdőívek</a></li>
+<li id="142"><a href="index.php?modul=kozossegi&muvelet=megmutat">Közösségi munka</a></li>
+<li id="153"><a href="index.php?modul=tesiadatlap&nemkellfejlec=1">Testnevelés igazolás</a></li>
+<li id="168"><a href="index.php?modul=faktg&muvelet=megmutat">Orientációs foglalkozás</a></li>
+<li id="169"><a href="index.php?modul=faktg&muvelet=megrendel">-jelentkezés nyomtatása</a></li>
+<li id="170"><a href="index.php?modul=faktn&muvelet=megmutat">2. idegeny nyelv</a></li>
+<li id="171"><a href="index.php?modul=faktn&muvelet=megrendel">-jelentkezés nyomtatása</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="18"><a href="#">Tankönyv</a>
+<ul width="200">
+<li id="21"><a href="index.php?modul=ingyentankonyv">Ingyentankönyvek</a></li>
+<li id="19"><a href="index.php?modul=tankonyv&muvelet=megmutat">Rendelés</a></li>
+<li id="20"><a href="index.php?modul=tknyomtat&muvelet=megrendel">Utolsó rendelés nyomtatása</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="138"><a href="#">Kommunikáció</a>
+<ul width="200">
+<li id="139"><a href="index.php?modul=email&muvelet=megmutat">E-mail cím megadása</a></li>
+<li id="174"><a href="index.php?modul=szavazas">Szavazás</a></li>
+<li id="166"><a href="index.php?modul=kerdoivvalasz">Elbírált kérdőívek</a></li>
+<li id="164"><a href="index.php?modul=kerdoiv">Kérdőívek</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="22"><a href="index.php?modul=orarend">Órarend</a>
+<ul width="200">
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="23"><a href="index.php?modul=tanarok">Tanárok</a>
+<ul width="200">
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="24"><a href="#">Technikai</a>
+<ul width="200">
+<li id="156"><a href="index.php?modul=netfit">Mérési azonosító</a></li>
+<li id="25"><a href="index.php?modul=wifi&muvelet=megmutat">WiFi adat megadása</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="27"><a href="#">Szülői</a>
+<ul width="200">
+<li id="28"><a href="index.php?modul=szulo&muvelet=megmutat">hozzáférés igénylése</a></li>
+<li id="29"><a href="index.php?modul=szulo&muvelet=megrendel">igénylés nyomtatása</a></li>
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+<li id="30"><a href="index.php?kilep=i">Kijelentkezés</a>
+<ul width="200">
+</ul>
+</li>
+<li id="50003" itemType="separator"></li>
+</ul><div id="menuDiv"></div></div></div>	<script type="text/javascript">
+	var menuModel = new DHTMLSuite.menuModel();
+	menuModel.addItemsFromMarkup('menuModel');
+	menuModel.setMainMenuGroupWidth(00);	
+	menuModel.init();
+	
+	var menuBar = new DHTMLSuite.menuBar();
+	menuBar.addMenuItems(menuModel);
+	menuBar.setTarget('menuDiv');
+	
+	menuBar.init();
+	
+	/* Create menu model for additional elements */
+	
+	var menuModel_add = new DHTMLSuite.menuModel();
+<!--	menuModel_add.addItemsFromMarkup('additionalModel'); -->
+	menuModel_add.init(); 
+	
+	
+	</script><table border="1" align=center cellspacing=0  ><tr bgcolor="#FFBE7D">
+<td  width="" align="center"  valign="top" colspan=6 ><FONT color=#000000 ><font color=""><font size=+2><b>Ördög Dávid</font size=+2></b></font></font></td>
+</tr>
+<tr bgcolor="#FFBE7D">
+<td  width="" align="center"  valign="top" colspan=6 ><FONT color=#000000 >Az egyéni órarend a csoportbontásos órák miatt jelenleg nem feltétlen teljes, lásd lentebb az osztály órarendjét!</font></td>
+</tr>
+<tr bgcolor="#F1B936">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>Hétfő</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>Kedd</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>Szerda</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>Csütörtök</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>Péntek</font size=+2></b></font></font></td>
+</tr>
+<tr bgcolor="#F3DBA9">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>1</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >vizuális kultúra <br />Paragi Éva<br />G - 113<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >matematika <br />Vargáné dr. Nádházi Ágnes<br />G - 111<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >magyar nyelv <br />Horváth Krisztina<br />G - 111<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >földrajz <br />László Györgyi<br />G - 006 földrajz előadó<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >kémia <br />Tóth Károlyné<br />G - kémia előadó<br /></font></td>
+</tr>
+<tr bgcolor="#FFFFFF">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>2</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >digitális kultúra <br />Rozgonyi-Borus Ferenc<br />G - Informatika 19<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >irodalom <br />Horváth Krisztina<br />G - 402<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >irodalom <br />Horváth Krisztina<br />G - 111<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >testnevelés és sport <br />Széll Ágnes<br />nagy tornaterem<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >olasz nyelv 2. nyelv<br />Veres Ágnes<br />G - 203<br /></font></td>
+</tr>
+<tr bgcolor="#F3DBA9">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>3</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >fizika <br />Kopasz Katalin (Dr.)<br />G - 307<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >olasz nyelv 2. nyelv<br />Veres Ágnes<br />G - 203<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >matematika <br />Vargáné dr. Nádházi Ágnes<br />G - 211<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >angol nyelv 1. nyelv<br />Illés Bence<br />G - 105<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >matematika <br />Vargáné dr. Nádházi Ágnes<br />G - 211<br /></font></td>
+</tr>
+<tr bgcolor="#FFFFFF">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>4</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >kémia <br />Tóth Károlyné<br />G - kémia előadó<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >biológia <br />Szalai Anikó<br />G - 114 biológia előadó<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >fizika <br />Kopasz Katalin (Dr.)<br />G - 304<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >biológia <br />Szalai Anikó<br />G - 214<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >angol nyelv 1. nyelv<br />Illés Bence<br />G - 204<br /></font></td>
+</tr>
+<tr bgcolor="#F3DBA9">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>5</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >digitális kultúra <br />Németh Tamás (Dr.)<br />G - Informatika 19<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >testnevelés és sport <br />Széll Ágnes<br />nagy tornaterem<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >digitális kultúra <br />Németh Tamás (Dr.)<br />G - Informatika 19<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >matematika <br />Vargáné dr. Nádházi Ágnes<br />G - 004<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >digitális kultúra <br />Rozgonyi-Borus Ferenc<br />G - Informatika 19<br /></font></td>
+</tr>
+<tr bgcolor="#FFFFFF">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>6</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >irodalom <br />Horváth Krisztina<br />G - 405<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >történelem <br />Mészáros Tibor<br />G - 218<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >történelem <br />Mészáros Tibor<br />G - 214<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >olasz nyelv 2. nyelv<br />Veres Ágnes<br />G - 201<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >fizika <br />Kopasz Katalin (Dr.)<br />G - 301<br /></font></td>
+</tr>
+<tr bgcolor="#F3DBA9">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 ><font color=""><font size=+2><b>7</font size=+2></b></font></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >angol nyelv 1. nyelv<br />Illés Bence<br />G - 204<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >osztályfőnöki <br />Mészáros Tibor<br />G - 214<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >ének-zene <br />Fehér Márta<br />G - 113<br /></font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+</tr>
+<tr bgcolor="#F1B936">
+<td  width="5%" align="center"  valign="top"  ><FONT color=#000000 >Du</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+<td  width="18%" align="center"  valign="top"  ><FONT color=#000000 >&nbsp;</font></td>
+</tr>
