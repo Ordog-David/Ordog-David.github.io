@@ -1,0 +1,18 @@
+body {
+    background-color: #7A1B7A;
+    text-align: center;
+
+}
+td {
+    background-color: #00008b;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+table {
+    user-select: none;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgb(23, 20, 20);
+    border: 1px 1px 1px black;
+}
