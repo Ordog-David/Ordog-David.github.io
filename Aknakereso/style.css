@@ -1,0 +1,52 @@
+body {
+    user-select: none;
+    text-align: center;
+    background-color: #7A1B7A;
+    color: black;
+}
+td {
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    box-shadow: 1px 1px 3px inset black;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    color: rgb(248, 246, 201);
+    user-select: none;
+}
+td.clicked {
+    background-color: #00008b;
+    color: #7A1B7A;
+}
+td.exploded {
+    background-color: red;
+    color: red;
+}
+td:hover {
+    background-color: #00008b;
+    box-shadow: 1px 1px 3px black;
+}
+td:active {
+    background-color: rgb(144, 54, 54);
+    box-shadow: 1px 1px 3px inset black;
+}
+td.clicked:hover {
+    background-color: #00008b;
+    box-shadow: 1px 1px 3px inset black;
+    cursor: not-allowed;
+}
+td.exploded:hover {
+    background-color: red;
+    box-shadow: 1px 1px 3px inset black;
+    cursor: not-allowed;
+}
+table {
+    cursor: not-allowed;
+    margin: auto;
+    padding: 6px;
+    background-color: azure;
+    border-radius: 7px;
+    box-shadow: 1px 1px 4px black;
+    border-collapse: collapse;
+}
