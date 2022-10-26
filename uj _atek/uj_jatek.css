@@ -15,4 +15,31 @@ table {
     text-align: center;
     text-shadow: 1px 1px 3px rgb(23, 20, 20);
     border: 1px 1px 1px black;
+    margin: auto;
+    padding: 6px;
+    border-spacing: 4px;
+    border-radius: 7px;
+    justify-content: center;
+}
+td:hover {
+    background-color: #00008b;
+    border: 1px 1px 1px black;
+}
+h2 {
+    border: 5px 5px 5px #00008b;
+    padding: 5px;
+    border-style: solid;
+    width: 80px;
+    margin: auto;
+    text-align: center;
+    background-color: #00008b;
+    cursor: pointer;
+}
+td:active {
+    background-color: #7A1B7A;
+}
+h2:active {
+    background-color: #7A1B7A;
+    color: #00008b;
+    border-color: #7A1B7A;
 }
