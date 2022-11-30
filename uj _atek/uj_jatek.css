@@ -9,6 +9,7 @@ td {
     height: 60px;
     text-align: center;
     cursor: pointer;
+    font-size: 50px;
 }
 table {
     user-select: none;
@@ -42,4 +43,11 @@ h2:active {
     background-color: #7A1B7A;
     color: #00008b;
     border-color: #7A1B7A;
+}
+td.felfedve {
+    color: #00008b;
+    background-color: #7A1B7A;
+    text-shadow: none;
+    font-size: 50px;
+    cursor: not-allowed;
 }
