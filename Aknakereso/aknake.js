@@ -1,7 +1,9 @@
 let n = 16
 let aknaszam = 40
 let maradhely = n * n - aknaszam
-let aknak = [] 
+let aknak = []
+let halott = false;
+
 aknagen = (max) => {
     for (let n = 0; n < max; ++n) {
         let akna
@@ -36,36 +38,43 @@ bennevan = (coordinates) => {
     return false
 }
 onClick = (target) => {
-    if (target.innerHTML.trim() === "") {
-        x = target.cellIndex
-        y = target.parentElement.rowIndex
-
-        if (bennevan([x, y])) {
-            target.setAttribute('class', 'exploded')
-            mutak()
-            alert("Veszitettel!")
-            return
+    if (halott == true) {
+        alert("Ne csalj")
+    }
+    else{
+        if (target.innerHTML.trim() === "") {
+            x = target.cellIndex
+            y = target.parentElement.rowIndex
+    
+            if (bennevan([x, y])) {
+                target.setAttribute('class', 'exploded')
+                mutak()
+                alert("Veszitettel!")
+                halott = true
+                return
+            }
+    
+            let neighboursWithMines = bennevan([x - 1, y - 1])
+                                    + bennevan([x - 1, y + 0])
+                                    + bennevan([x - 1, y + 1])
+                                    + bennevan([x + 0, y - 1])
+                                    + bennevan([x + 0, y + 1])
+                                    + bennevan([x + 1, y - 1])
+                                    + bennevan([x + 1, y + 0])
+                                    + bennevan([x + 1, y + 1]);
+            target.innerHTML = neighboursWithMines
+            target.setAttribute('class', 'clicked')
+    
+            if (--maradhely == 0) {
+                mutak()
+                alert("Nyertel!")
+            }
+    
+            document.getElementById('remaining').innerHTML = maradhely
         }
-
-        let neighboursWithMines = bennevan([x - 1, y - 1])
-                                + bennevan([x - 1, y + 0])
-                                + bennevan([x - 1, y + 1])
-                                + bennevan([x + 0, y - 1])
-                                + bennevan([x + 0, y + 1])
-                                + bennevan([x + 1, y - 1])
-                                + bennevan([x + 1, y + 0])
-                                + bennevan([x + 1, y + 1]);
-        target.innerHTML = neighboursWithMines
-        target.setAttribute('class', 'clicked')
-
-        if (--maradhely == 0) {
-            mutak()
-            alert("Nyertel!")
-        }
-
-        document.getElementById('remaining').innerHTML = maradhely
     }
 }
+    
 (init = () => {
     aknagen(aknaszam)
     document.getElementById('remaining').innerHTML = maradhely
