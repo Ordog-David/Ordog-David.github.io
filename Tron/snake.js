@@ -1,190 +1,162 @@
-//nx = "O", n = 16
-//f = e => { if (e.innerHTML == "") {
-    //nx = nx == "O" ? "X" : "O"
-    //e.innerHTML = nx, e.setAttribute('class', nx)
-    //x = e.cellIndex, y = e.parentElement.rowIndex, t[x][y] = nx
-    //setTimeout(() => [[1,1],[1,0],[0,1],[-1,1]].forEach( d => {
-        //xp=x, yp=y, maxh=0, [vx, vy] = d
-        //while (t[xp][yp] === nx) xp += vx, yp += vy, maxh++
-        //xp=x, yp=y
-        //while (t[xp][yp] === nx) xp -= vx, yp -= vy, maxh++
-        //if (maxh > 5) alert(`Nyert: ${nx}`), init()
-    //}), 100)
-//}}
-//(init = () => {
-    //t = Array(n).fill().map(() => Array(n).fill())
-    //document.getElementById('t').innerHTML = `
-    //<table>
-        //${Array(n).fill(`
-        //<tr>
-        //${Array(n).fill(`<td onmouseup="f(this)" />`).join('')}
-        //</tr>
-        //`).join('')}
-    //</table>`
-//})()
-
-var blockSize = 25;
+var meret = 25;
 var rows = 20;
 var cols = 40;
-var board;
+var tabla;
 var context; 
 
-var snakeX = blockSize * 5;
-var snakeY = blockSize * 5;
+var kigX = meret * 5;
+var kigY = meret * 5;
+var kigX2 = meret * 30;
+var kigY2 = meret * 15;
 
-var velocityX = 0;
-var velocityY = 0;
+var SpeedX = 0;
+var Speedy = 0;
+var SpeedX2 = 0;
+var Speedy2 = 0;
 
-var snakeBody = [];
-
-var snakeX2 = blockSize * 30;
-var snakeY2 = blockSize * 15;
-
-var velocityX2 = 0;
-var velocityY2 = 0;
-
-var snakeBody2 = [];
+var kigyotest = [];
+var kigyotest2 = [];
 
 
-var foodX;
-var foodY;
+var almax;
+var almay;
 
-var gameOver = false;
+var halal = false;
 
 window.onload = function() {
-    board = document.getElementById("board");
-    board.height = rows * blockSize;
-    board.width = cols * blockSize;
-    context = board.getContext("2d");
+    tabla = document.getElementById("tabla");
+    tabla.height = rows * meret;
+    tabla.width = cols * meret;
+    context = tabla.getContext("2d");
 
-    placeFood();
-    document.addEventListener("keyup", changeDirection);
+    etetes();
+    document.addEventListener("keyup", irany);
     setInterval(update, 1000/10); 
 }
 
 function update() {
-    if (gameOver) {
+    if (halal) {
         return;
     }
 
     context.fillStyle="black";
-    context.fillRect(0, 0, board.width, board.height);
+    context.fillRect(0, 0, tabla.width, tabla.height);
 
     context.fillStyle="gold";
-    context.fillRect(foodX, foodY, blockSize, blockSize);
+    context.fillRect(almax, almay, meret, meret);
 
-    if (snakeX == foodX && snakeY == foodY) {
-        snakeBody.push([foodX, foodY]);
-        placeFood();
+    if (kigX == almax && kigY == almay) {
+        kigyotest.push([almax, almay]);
+        etetes();
     }
-    if (snakeX2 == foodX && snakeY2 == foodY) {
-        snakeBody2.push([foodX, foodY]);
-        placeFood();
-    }
-
-    for (let i = snakeBody.length-1; i > 0; i--) {
-        snakeBody[i] = snakeBody[i-1];
-    }
-    if (snakeBody.length) {
-        snakeBody[0] = [snakeX, snakeY];
+    if (kigX2 == almax && kigY2 == almay) {
+        kigyotest2.push([almax, almay]);
+        etetes();
     }
 
-    for (let i = snakeBody2.length-1; i > 0; i--) {
-        snakeBody2[i] = snakeBody2[i-1];
+    for (let i = kigyotest.length-1; i > 0; i--) {
+        kigyotest[i] = kigyotest[i-1];
     }
-    if (snakeBody2.length) {
-        snakeBody2[0] = [snakeX2, snakeY2];
+    if (kigyotest.length) {
+        kigyotest[0] = [kigX, kigY];
+    }
+
+    for (let i = kigyotest2.length-1; i > 0; i--) {
+        kigyotest2[i] = kigyotest2[i-1];
+    }
+    if (kigyotest2.length) {
+        kigyotest2[0] = [kigX2, kigY2];
     }
 
     context.fillStyle="#00008b";
-    snakeX += velocityX * blockSize;
-    snakeY += velocityY * blockSize;
-    context.fillRect(snakeX, snakeY, blockSize, blockSize);
-    for (let i = 0; i < snakeBody.length; i++) {
-        context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+    kigX += SpeedX * meret;
+    kigY += Speedy * meret;
+    context.fillRect(kigX, kigY, meret, meret);
+    for (let i = 0; i < kigyotest.length; i++) {
+        context.fillRect(kigyotest[i][0], kigyotest[i][1], meret, meret);
     }
     
     context.fillStyle="#7A1B7A";
-    snakeX2 += velocityX2 * blockSize;
-    snakeY2 += velocityY2 * blockSize;
-    context.fillRect(snakeX2, snakeY2, blockSize, blockSize);
-    for (let i = 0; i < snakeBody2.length; i++) {
-        context.fillRect(snakeBody2[i][0], snakeBody2[i][1], blockSize, blockSize);
+    kigX2 += SpeedX2 * meret;
+    kigY2 += Speedy2 * meret;
+    context.fillRect(kigX2, kigY2, meret, meret);
+    for (let i = 0; i < kigyotest2.length; i++) {
+        context.fillRect(kigyotest2[i][0], kigyotest2[i][1], meret, meret);
     }
 
 
-    if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize) {
-        gameOver = true;
+    if (kigX < 0 || kigX > cols*meret || kigY < 0 || kigY > rows*meret) {
+        halal = true;
         alert("Player 1 won");
     }
-    if (snakeX2 < 0 || snakeX2 > cols*blockSize || snakeY2 < 0 || snakeY2 > rows*blockSize) {
-        gameOver = true;
+    if (kigX2 < 0 || kigX2 > cols*meret || kigY2 < 0 || kigY2 > rows*meret) {
+        halal = true;
         alert("Player 1 won");
     }
 
-    for (let i = 0; i < snakeBody.length; i++) {
-        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
-            gameOver = true;
+    for (let i = 0; i < kigyotest.length; i++) {
+        if (kigX == kigyotest[i][0] && kigY == kigyotest[i][1]) {
+            halal = true;
             alert("Player 2 won");
         }
     }
-    for (let i = 0; i < snakeBody2.length; i++) {
-        if (snakeX == snakeBody2[i][0] && snakeY == snakeBody2[i][1]) {
-            gameOver = true;
+    for (let i = 0; i < kigyotest2.length; i++) {
+        if (kigX == kigyotest2[i][0] && kigY == kigyotest2[i][1]) {
+            halal = true;
             alert("Player 2 won");
         }
     }
-    for (let i = 0; i < snakeBody.length; i++) {
-        if (snakeX2 == snakeBody[i][0] && snakeY2 == snakeBody[i][1]) {
-            gameOver = true;
+    for (let i = 0; i < kigyotest.length; i++) {
+        if (kigX2 == kigyotest[i][0] && kigY2 == kigyotest[i][1]) {
+            halal = true;
             alert("Player 2 won");
         }
     }
-    for (let i = 0; i < snakeBody2.length; i++) {
-        if (snakeX2 == snakeBody2[i][0] && snakeY2 == snakeBody2[i][1]) {
-            gameOver = true;
+    for (let i = 0; i < kigyotest2.length; i++) {
+        if (kigX2 == kigyotest2[i][0] && kigY2 == kigyotest2[i][1]) {
+            halal = true;
             alert("Player 2 won");
         }
     }
 }
 
-function changeDirection(e) {
-    if (e.code == "ArrowUp" && velocityY != 1) {
-        velocityX = 0;
-        velocityY = -1;
+function irany(e) {
+    if (e.code == "ArrowUp" && Speedy != 1) {
+        SpeedX = 0;
+        Speedy = -1;
     }
-    else if (e.code == "ArrowDown" && velocityY != -1) {
-        velocityX = 0;
-        velocityY = 1;
+    else if (e.code == "ArrowDown" && Speedy != -1) {
+        SpeedX = 0;
+        Speedy = 1;
     }
-    else if (e.code == "ArrowLeft" && velocityX != 1) {
-        velocityX = -1;
-        velocityY = 0;
+    else if (e.code == "ArrowLeft" && SpeedX != 1) {
+        SpeedX = -1;
+        Speedy = 0;
     }
-    else if (e.code == "ArrowRight" && velocityX != -1) {
-        velocityX = 1;
-        velocityY = 0;
+    else if (e.code == "ArrowRight" && SpeedX != -1) {
+        SpeedX = 1;
+        Speedy = 0;
     }
-    if (e.code == "KeyW" && velocityY2 != 1) {
-        velocityX2 = 0;
-        velocityY2 = -1;
+    if (e.code == "KeyW" && Speedy2 != 1) {
+        SpeedX2 = 0;
+        Speedy2 = -1;
     }
-    else if (e.code == "KeyS" && velocityY2 != -1) {
-        velocityX2 = 0;
-        velocityY2 = 1;
+    else if (e.code == "KeyS" && Speedy2 != -1) {
+        SpeedX2 = 0;
+        Speedy2 = 1;
     }
-    else if (e.code == "KeyA" && velocityX2 != 1) {
-        velocityX2 = -1;
-        velocityY2 = 0;
+    else if (e.code == "KeyA" && SpeedX2 != 1) {
+        SpeedX2 = -1;
+        Speedy2 = 0;
     }
-    else if (e.code == "KeyD" && velocityX2 != -1) {
-        velocityX2 = 1;
-        velocityY2 = 0;
+    else if (e.code == "KeyD" && SpeedX2 != -1) {
+        SpeedX2 = 1;
+        Speedy2 = 0;
     }
 }
 
 
-function placeFood() {
-    foodX = Math.floor(Math.random() * cols) * blockSize;
-    foodY = Math.floor(Math.random() * rows) * blockSize;
+function etetes() {
+    almax = Math.floor(Math.random() * cols) * meret;
+    almay = Math.floor(Math.random() * rows) * meret;
 }
