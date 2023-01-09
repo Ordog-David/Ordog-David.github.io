@@ -1,4 +1,4 @@
-lastMoved = "O", n = 16
+lastMoved = "O", n = 3
 inTable = (x, y) => {
     return currentX >= 0 && currentX < n && currentY >= 0 && currentY < n
 }
@@ -29,7 +29,7 @@ onClick = target => {
                 currentY -= deltaY
                 length++
             }
-            if (length > 5) {
+            if (length > 3) {
                 alert(`Nyert: ${lastMoved}`)
                 init()
             }
