@@ -1,0 +1,43 @@
+body {
+    user-select: none;
+    text-align: center;
+    background-color: #7A1B7A;
+    color: black;
+}
+table.billentyuzet {
+    cursor: not-allowed;
+    display: inline-table;
+    margin: auto;
+    padding: 6px;
+    background-color: black;
+    border-radius: 7px;
+    box-shadow: 1px 1px 4px #00008b;
+}
+table.billentyuzet td {
+    width: 75px;
+    height: 75px;
+    background-color: #00008b;
+    box-shadow: 1px 1px 3px inset black;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    color: rgb(248, 246, 201);
+    user-select: none;
+}
+table.billentyuzet td.clicked {
+    background-color: #00008b;
+    color: #7A1B7A;
+}
+table.billentyuzet td:hover {
+    background-color: #00008b;
+    box-shadow: 1px 1px 3px black;
+}
+table.billentyuzet td:active {
+    background-color: #7A1B7A;
+    box-shadow: 1px 1px 3px inset black;
+}
+table.billentyuzet td.clicked:hover {
+    background-color: #00008b;
+    box-shadow: 1px 1px 3px inset black;
+    cursor: not-allowed;
+}
