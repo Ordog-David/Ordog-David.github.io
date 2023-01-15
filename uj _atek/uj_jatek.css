@@ -3,13 +3,14 @@ body {
     text-align: center;
 
 }
-td {
+td.hidden {
     background-color: #00008b;
     width: 60px;
     height: 60px;
     text-align: center;
     cursor: pointer;
     font-size: 50px;
+    text-indent: -1000em
 }
 table {
     user-select: none;
@@ -22,11 +23,8 @@ table {
     border-radius: 7px;
     justify-content: center;
 }
-td:hover {
-    background-color: #00008b;
-    border: 1px 1px 1px black;
-}
-h2 {
+.buton {
+    font-family: 'Times New Roman', Times, serif;
     border: 5px 5px 5px #00008b;
     padding: 5px;
     border-style: solid;
@@ -35,19 +33,22 @@ h2 {
     text-align: center;
     background-color: #00008b;
     cursor: pointer;
+    font-size: larger;
 }
 td:active {
     background-color: #7A1B7A;
 }
-h2:active {
+.buton:active {
     background-color: #7A1B7A;
     color: #00008b;
     border-color: #7A1B7A;
 }
-td.felfedve {
+td {
     color: #00008b;
     background-color: #7A1B7A;
     text-shadow: none;
     font-size: 50px;
     cursor: not-allowed;
+    width: 60px;
+    height: 60px;
 }
