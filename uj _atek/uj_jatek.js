@@ -1,46 +1,65 @@
 let n = 5;
 var ranumber = [];
 let i = 0;
-let lista = [];
 let num = -1
 let k = 0
+console.log(k)
+let clicked = false
+let number = 0 
+let random_list = []
+
+
 
 function generalas(n) {
     while(ranumber.length < n*n) {
-    var num = Math.round(Math.random() * (n*n-1));
+        var num = Math.round(Math.random() * (n*n-1));
         if(ranumber.indexOf(num) === -1) {
             ranumber.push(num);
         }     
     }
-helyezes(n)}
-generalas(n);
+}
 console.log(ranumber)
-
-function helyezes(n) {
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            console.log(j,lista)
-            lista.push[i,j,ranumber[k]]
-            k++ 
-        }
-    }
-} 
 function nezes (target) {
+    number = Number(target.innerHTML)
     x = target.cellIndex
     y = target.parentElement.rowIndex
-    if (target.classList.contains('felfedve')){
+    if (clicked == false){
         alert("Ne csalj!")
     }
     else {
-        console.log("B",target)
-        target.setAttribute('class', 'felfedve') 
-        target.innerHTML = num 
+        target.setAttribute('class', '')
+        if (number == k) {
+            k = k + 1
+            console.log(k)
+        }
+        else {
+            alert("Vesztettél")
+            let table = document.getElementById("t").children[0]
+            for (y = 0; y < n; y++) {
+            let row = table.rows[y]
+            for (x = 0; x < n; x++) {
+            let cell = row.cells[x];
+            cell.setAttribute('class','')
+            }}
+        }
+
     }
 }
-
+var button = document.getElementById("button");
+button.addEventListener("click", function(e) {
+    let table = document.getElementById("t").children[0]
+    clicked = true
+    k = 0
+    for (y = 0; y < n; y++) {
+        let row = table.rows[y]
+        for (x = 0; x < n; x++) {
+            let cell = row.cells[x];
+            cell.setAttribute('class','hidden')
+        }
+   }
+});
 
 (init = () => {
-    table = Array(n).fill().map(() => Array(n).fill())
     document.getElementById('t').innerHTML = `
     <table>
         ${Array(n).fill(`
@@ -49,4 +68,15 @@ function nezes (target) {
         </tr>
         `).join('')}
     </table>`
+    generalas(n);
+    let table = document.getElementById("t").children[0]
+    i = 0;
+    for (y = 0; y < n; y++) {
+        let row = table.rows[y]
+        for (x = 0; x < n; x++) {
+            let cell = row.cells[x];
+            cell.innerHTML = ranumber[i++]
+        }
+    }
+
 })()
