@@ -20,30 +20,42 @@ function generalas(n) {
 }
 console.log(ranumber)
 function nezes (target) {
+    let table = document.getElementById("t").children[0]
     number = Number(target.innerHTML)
     x = target.cellIndex
     y = target.parentElement.rowIndex
-    if (clicked == false){
-        alert("Ne csalj!")
-    }
-    else {
-        target.setAttribute('class', '')
-        if (number == k) {
-            k = k + 1
-            console.log(k)
+        if (clicked == false){
+            alert("Ne csalj!")
         }
         else {
+            target.setAttribute('class', '')
+            if (number == k) {
+                k = k + 1
+                if (k == 25) {
+                    alert("Nyertél")
+                    for (y = 0; y < n; y++) {
+                        let row = table.rows[y]
+                        for (x = 0; x < n; x++) {
+                            let cell = row.cells[x];
+                            cell.setAttribute('class','')
+                            clicked = false
+                        }
+                   }
+                console.log(k)
+            }        }
+        else {
             alert("Vesztettél")
-            let table = document.getElementById("t").children[0]
+            clicked = false
             for (y = 0; y < n; y++) {
-            let row = table.rows[y]
+                let row = table.rows[y]
             for (x = 0; x < n; x++) {
-            let cell = row.cells[x];
-            cell.setAttribute('class','')
-            }}
-        }
+                let cell = row.cells[x];
+                cell.setAttribute('class','')
+                }}
+            }
 
     }
+    
 }
 var button = document.getElementById("button");
 button.addEventListener("click", function(e) {
@@ -58,6 +70,7 @@ button.addEventListener("click", function(e) {
         }
    }
 });
+
 
 (init = () => {
     document.getElementById('t').innerHTML = `
