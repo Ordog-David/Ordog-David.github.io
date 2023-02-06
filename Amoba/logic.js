@@ -1,4 +1,5 @@
 lastMoved = "O", n = 3
+let numb = 0;
 inTable = (x, y) => {
     return currentX >= 0 && currentX < n && currentY >= 0 && currentY < n
 }
@@ -29,14 +30,21 @@ onClick = target => {
                 currentY -= deltaY
                 length++
             }
+            
             if (length > 3) {
                 alert(`Nyert: ${lastMoved}`)
                 init()
             }
+            if (numb == 9) {
+                alert("Döntetlen")
+                init()
+            }
+            
         }), 100)
     }
-}
+numb = numb + 1}
 (init = () => {
+    numb = 0
     table = Array(n).fill().map(() => Array(n).fill())
     document.getElementById('t').innerHTML = `
     <table>
