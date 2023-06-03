@@ -96,4 +96,3 @@ b(lista)
 c(lista)
 d(lista)
 e(lista)
-#"Csak mert a fizika tanár jó fej és sokmindent próbál tanítani"
