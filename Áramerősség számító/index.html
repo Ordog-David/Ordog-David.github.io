@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Áramerősség Számító</title>
+    <link rel="stylesheet" href="aramerosseg_szamito.css">
+</head>
+<body>
+    <h1>Áramkör</h1>
+    <table>
+        <td>
+            <img src="Aramkor_nyitott.svg" id= "image" style="text-align: left; margin: auto;">
+        </td>
+        <td>
+            <div id="InputFields">
+                <div>
+                    <label for="U0">U</label>
+                    <input type="number" value="1" id="U0" name="U0" min="0" oninput="changeU0()">
+                </div>
+                <div>
+                    <label for="U1">U1</label>
+                    <input type="number" id="U1" name="U1" min="0" oninput="changeU1()">
+                </div>
+                <div>
+                    <label for="U2">U2</label>
+                    <input type="number" id="U2" name="U2" min="0" oninput="changeU2()">
+                </div>
+                <div>
+                    <label for="U3">U3</label>
+                    <input type="number" id="U3" name="U3" min="0" oninput="changeU3()">
+                </div>
+                <div>
+                    <label for="I0">I</label>
+                    <input type="number" id="I0" name="I0" min="0" oninput="changeI0()">
+                </div>
+                <div>
+                    <label for="I1">I1</label>
+                    <input type="number" id="I1" name="I1" min="0" oninput="changeI1()">
+                </div>
+                <div>
+                    <label for="I2">I2</label>
+                    <input type="number" id="I2" name="I2" min="0" oninput="changeI2()">
+                </div>
+                <div>
+                    <label for="I3">I3</label>
+                    <input type="number" id="I3" name="I3" min="0" oninput="changeI3()">
+                </div>
+                <div>
+                    <label for="R">R</label>
+                    <input type="number" id="R0" name="R0" readonly>
+                </div>
+                <div>
+                    <label for="R1">R1</label>
+                    <input type="number" value="1" id="R1" name="R1" min="0" oninput="changeR1()">
+                </div>
+                <div>
+                    <label for="R2">R2</label>
+                    <input type="number" value="1" id="R2" name="R2" min="0" oninput="changeR2()">
+                </div>
+                <div>
+                    <label for="R3">R3</label>
+                    <input type="number" value="1" id="R3" name="R3" min="0" oninput="changeR3()">
+                </div>
+            </div>
+                
+        </td>
+    </table>
+    
+    <label class="switch">
+        <input type="checkbox" id="switch" onclick="changeImage(this)">
+        <span class="slider round"></span>
+    </label>
+    <div>
+    </div>
+    <div style="text-align: right; text-align: bottom;">
+        <p><a href="https://www.w3schools.com/howto/howto_css_switch.asp" style="color: blue;">Forrás</a></p>
+
+    </div>
+</body>
+<script src="aramerosseg_szamito.js" type="text/javascript"></script>
+</html>
