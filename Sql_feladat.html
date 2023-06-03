@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL feladat</title>
+</head>
+<body style="background-color: #7A1B7A;">
+    <div style="text-align: center;">
+        <h1>SQL Feladat</h1>
+    </div>
+    <div style="text-align: center;">
+        <p>2vas: SELECT letszam FROM megye WHERE nev = "Vas";</p>
+        <p>3somogy: SELECT SUM(aerob.letszam) FROM aerob JOIN megye ON megye.kod = aerob.mkod WHERE megye.nev = "Somogy";</p>
+        <p>4zala: SELECT aerob.letszam FROM aerob JOIN megye ON megye.kod = aerob.mkod JOIN allapot ON allapot.kod = aerob.allkod WHERE megye.nev = "Zala" AND aerob.nem = 1 AND allapot.nev = "Egészséges";</p>
+        <p>5heves: SELECT COUNT(*) FROM megye WHERE letszam < (SELECT letszam FROM megye WHERE nev = "Heves");</p>
+        <p>6pest: SELECT SUM(aerob.letszam)/megye.letszam FROM aerob JOIN megye ON megye.kod = aerob.mkod WHERE megye.nev = "Pest" GROUP BY mkod;</p>
+        <p>7egesz: SELECT megye.nev, aerob.letszam FROM aerob JOIN megye ON megye.kod = aerob.mkod JOIN allapot ON allapot.kod = aerob.allkod WHERE aerob.nem = 0 AND allapot.nev = "Egészséges" ORDER BY aerob.letszam DESC;</p>
+        <p>8arany: SELECT megye.nev, SUM(aerob.letszam)/megye.letszam AS arany FROM aerob JOIN megye ON megye.kod = aerob.mkod GROUP BY mkod ORDER BY arany DESC LIMIT 1;</p>
+        <p>9negyed: SELECT megye.nev AS Megyenév, SUM(aerob.letszam)/megye.letszam AS Arány FROM aerob JOIN megye ON megye.kod = aerob.mkod JOIN allapot ON allapot.kod = aerob.allkod WHERE allapot.nev = "fejlesztést igényel" OR allapot.nev = "fokozott fejlesztést igényel" GROUP BY mkod;</p>
+    </div>
+
+</body>
+</html>
