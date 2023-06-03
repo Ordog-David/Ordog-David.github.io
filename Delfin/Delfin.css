@@ -1,0 +1,9 @@
+body {
+    user-select: none;
+    background-color: #7A1B7A;
+    color: black;
+}
+h1 {
+    text-align: center;
+    color: #00008b;
+}
