@@ -1,5 +1,6 @@
 import type { GameState } from "./GameState"
 import type { SquareState } from "./SquareState"
+
 import { getSquare } from "./Common"
 import { executeMove } from "./Move"
 
@@ -38,7 +39,7 @@ function initializePieces(game: GameState, pieces: string): void {
 function initializeGame(game: GameState, activeColor: string, castlingAvailability: string,
                         enPassantTargetSquare: string): void {
     game.activeColor = activeColor
-    game.castlingAvailability = castlingAvailability !== '-' ? castlingAvailability : null
+    game.castlingAvailability = castlingAvailability !== '-' ? [...castlingAvailability] : []
     game.enPassantTargetSquare =
         enPassantTargetSquare !== '-' ? getSquareFromCoordinate(game, enPassantTargetSquare) : null
 }

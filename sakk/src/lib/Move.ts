@@ -1,4 +1,4 @@
-import { getSquare } from "./Common"
+import { getRelativeSquare, getSquare } from "./Common"
 import type { GameState } from "./GameState"
 import type { SquareState } from "./SquareState"
 
@@ -16,14 +16,23 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
     checkForEnPassant(game, from, to)
 
     // TODO: Pawn promotion
-    // TODO: Castling
-    // TODO: Check
-    // TODO: Checkmate
+
+    /* Check if the current move is a castling */
+    if (from.piece.toLowerCase() === 'k' && Math.abs(from.file - to.file) == 2) {
+        executeCastling(game, from, to)
+    }
+
+    /* Check if the current move precludes some castling */
+    checkForCastling(game, from, to)
 
     to.piece = possiblyPromote(from.piece, promotion)
     from.piece = null
 
     game.fenMoves.push(createFenMove(from, to, promotion))
+
+    // TODO: Check
+    // TODO: Checkmate
+
     game.activeColor = game.activeColor === 'w' ? 'b' : 'w'
 }
 
@@ -42,6 +51,50 @@ function checkForEnPassant(game: GameState, from: SquareState, to: SquareState):
         game.enPassantTargetSquare = game.squares[rank][to.file]
     } else {
         game.enPassantTargetSquare = null
+    }
+}
+
+function executeCastling(game: GameState, from: SquareState, to: SquareState): void {
+    if (from.file > to.file) {
+        const rookFrom = getSquare(game, from.rank, 0)!
+        const rookTo = getSquare(game, from.rank, 3)!
+        rookTo.piece = rookFrom.piece
+        rookFrom.piece = null
+    } else {
+        const rookFrom = getSquare(game, from.rank, 7)!
+        const rookTo = getSquare(game, from.rank, 5)!
+        rookTo.piece = rookFrom.piece
+        rookFrom.piece = null
+    }
+}
+
+function checkForCastling(game: GameState, from: SquareState, to: SquareState): void {
+    if (from.piece === 'K') {
+        removeCastling(game, 'Q')
+        removeCastling(game, 'K')
+    }
+    if (from.piece === 'R' && from.file == 0) {
+        removeCastling(game, 'Q')
+    }
+    if (from.piece === 'R' && from.file == 7) {
+        removeCastling(game, 'K')
+    }
+    if (from.piece === 'k') {
+        removeCastling(game, 'q')
+        removeCastling(game, 'k')
+    }
+    if (from.piece === 'r' && from.file == 0) {
+        removeCastling(game, 'q')
+    }
+    if (from.piece === 'r' && from.file == 7) {
+        removeCastling(game, 'k')
+    }
+}
+
+function removeCastling(game: GameState, castling: string): void {
+    const index = game.castlingAvailability.indexOf(castling)
+    if (index >= 0) {
+        game.castlingAvailability.splice(index, 1)
     }
 }
 

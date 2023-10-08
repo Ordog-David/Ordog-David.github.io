@@ -5,7 +5,7 @@ export class GameState {
     squares: Array<Array<SquareState>>
     playerColor: string
     activeColor: string = "w"
-    castlingAvailability: string | null = null
+    castlingAvailability: Array<string> = Array()
     enPassantTargetSquare: SquareState | null = null
     stockfish: Stockfish
     fenStartingPosition: string = ''
