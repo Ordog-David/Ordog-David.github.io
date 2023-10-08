@@ -178,7 +178,7 @@
 </table>
 
 <div style="text-align: right; text-align: bottom;">
-    <!--<img src="/images/opponent.png"/>-->
+    <img src="images/opponent.png" alt="Ellenfél" />
 </div>
 
 <style>
