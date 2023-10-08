@@ -70,12 +70,7 @@
         }
 
         if (game.playerColor !== game.activeColor) {
-            let fen = game.fenStartingPosition
-            if (game.fenMoves.length !== 0) {
-                fen += ' moves ' + game.fenMoves.join(' ')
-            }
-
-            game.stockfish.getMove(fen).then((move) => playStockfishMove(move))
+            game.stockfish.getMove(game.getFen()).then((move) => playStockfishMove(move))
         }
 
         game = game

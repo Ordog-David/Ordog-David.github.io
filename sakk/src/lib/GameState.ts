@@ -32,4 +32,12 @@ export class GameState {
         }
         return rank
     }
+
+    getFen(): string {
+        let fen = this.fenStartingPosition
+        if (this.fenMoves.length !== 0) {
+            fen += ' moves ' + this.fenMoves.join(' ')
+        }
+        return fen
+    }
 }
