@@ -1,6 +1,7 @@
 import type { GameState } from "./GameState"
 import type { SquareState } from "./SquareState"
-import { getRelativeSquare } from "./Common"
+
+import { checkMove } from "./Common"
 
 export function knightMoves(game: GameState, square: SquareState): Array<SquareState> {
     const moveDestinationSquares: Array<SquareState> = []
@@ -17,10 +18,3 @@ export function knightMoves(game: GameState, square: SquareState): Array<SquareS
     return moveDestinationSquares
 }
 
-function checkMove(game: GameState, square: SquareState, dRank: number, dFile: number,
-                   moveDestinationSquares: Array<SquareState>): void {
-    const destinationSquare = getRelativeSquare(game, square, dRank, dFile)
-    if (destinationSquare !== null && destinationSquare.pieceColor() !== square.pieceColor()) {
-        moveDestinationSquares.push(destinationSquare)
-    }
-}

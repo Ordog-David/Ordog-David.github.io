@@ -14,6 +14,14 @@ export function getSquare(game: GameState, rank: number, file: number): SquareSt
     return game.squares[rank][file]
 }
 
+export function checkMove(game: GameState, square: SquareState, dRank: number, dFile: number,
+                          moveDestinationSquares: Array<SquareState>): void {
+    const destinationSquare = getRelativeSquare(game, square, dRank, dFile)
+    if (destinationSquare !== null && destinationSquare.pieceColor() !== square.pieceColor()) {
+        moveDestinationSquares.push(destinationSquare)
+    }
+}
+
 export function checkMoves(game: GameState, square: SquareState, dRank: number, dFile: number,
                            moveDestinationSquares: Array<SquareState>): void {
     const opponentColor = square.pieceColor() == 'w' ? 'b' : 'w'

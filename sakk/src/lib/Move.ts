@@ -7,7 +7,7 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
     }
 
     if (to === game.enPassantTargetSquare) {
-        executeEnPassant(game, from, to)
+        //executeEnPassant(game, from, to)
     }
 
     checkForEnPassant(game, from, to)
@@ -20,7 +20,8 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
     to.piece = possiblyPromote(from.piece, promotion)
     from.piece = null
 
-    //game.activeColor = game.activeColor === 'w' ? 'b' : 'w'
+    game.fenMoves.push(createFenMove(from, to, promotion))
+    game.activeColor = game.activeColor === 'w' ? 'b' : 'w'
 }
 
 function checkForEnPassant(game: GameState, from: SquareState, to: SquareState): void {
@@ -42,4 +43,14 @@ function possiblyPromote(piece: string, promotion: string): string {
     }
 
     return promotion.toUpperCase()
+}
+
+function createFenMove(from: SquareState, to: SquareState, promotion: string): string {
+    return createFenPosition(from) + createFenPosition(to) + promotion
+}
+
+function createFenPosition(square: SquareState): string {
+    const file = String.fromCodePoint("a".codePointAt(0)! + square.file)
+    const rank = (square.rank + 1).toString()
+    return file + rank
 }

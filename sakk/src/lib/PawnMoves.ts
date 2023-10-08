@@ -24,7 +24,7 @@ export function pawnMoves(game: GameState, square: SquareState): Array<SquareSta
     checkCapture(game, aboveLeftSquare, opponentColor, moveDestinationSquares)
 
     const aboveRightSquare = getRelativeSquare(game, square, dRank, 1)
-    checkCapture(game, aboveLeftSquare, opponentColor, moveDestinationSquares)
+    checkCapture(game, aboveRightSquare, opponentColor, moveDestinationSquares)
 
     return moveDestinationSquares
 }

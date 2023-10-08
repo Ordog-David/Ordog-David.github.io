@@ -1,4 +1,5 @@
 import { SquareState } from "./SquareState"
+import { Stockfish } from "./Stockfish"
 
 export class GameState {
     squares: Array<Array<SquareState>>
@@ -6,10 +7,14 @@ export class GameState {
     activeColor: string = "w"
     castlingAvailability: string | null = null
     enPassantTargetSquare: SquareState | null = null
+    stockfish: Stockfish
+    fenStartingPosition: string = ''
+    fenMoves: Array<string> = new Array()
 
     constructor(playerColor: string) {
         this.squares = this.createSquares()
         this.playerColor = playerColor
+        this.stockfish = new Stockfish(4000, 20)
     }
 
     createSquares(): Array<Array<SquareState>> {

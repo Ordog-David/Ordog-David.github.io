@@ -3,12 +3,14 @@ import type { SquareState } from "./SquareState"
 import { getSquare } from "./Common"
 import { executeMove } from "./Move"
 
-const startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 e2e4"
+const startPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 export function initializeStateFromFEN(game: GameState, fen: string | null = null): void {
     if (fen === null) {
         fen = startPosition
     }
+
+    game.fenStartingPosition = fen
 
     const [pieces, activeColor, castlingAvailability, enPassantTargetSquare, , , ...moves] = fen.split(' ')
     initializePieces(game, pieces)
@@ -45,7 +47,7 @@ function playMoves(game: GameState, moves: Array<string>): void {
     moves.forEach(move => playMove(game, move))
 }
 
-function playMove(game: GameState, move: string): void {
+export function playMove(game: GameState, move: string): void {
     const from = getSquareFromCoordinate(game, move.substring(0, 2))
     if (from == null) {
         throw new Error("Invalid from position")

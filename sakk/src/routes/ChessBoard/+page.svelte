@@ -4,7 +4,7 @@
     import Rank from './Rank.svelte'
 
     import { onMount } from 'svelte'
-    import { initializeStateFromFEN } from '$lib/ForsythEdwardsNotation'
+    import { initializeStateFromFEN, playMove } from '$lib/ForsythEdwardsNotation'
 	import { executeMove } from '$lib/Move'
 	import { pawnMoves } from '$lib/PawnMoves'
 	import { knightMoves } from '$lib/KnightMoves'
@@ -67,6 +67,15 @@
                 square.clickable = game.playerColor === game.activeColor && game.playerColor === square.pieceColor()
                 square.moveDestination = false
             }
+        }
+
+        if (game.playerColor !== game.activeColor) {
+            let fen = game.fenStartingPosition
+            if (game.fenMoves.length !== 0) {
+                fen += ' moves ' + game.fenMoves.join(' ')
+            }
+
+            game.stockfish.getMove(fen).then((move) => playStockfishMove(move))
         }
 
         game = game
@@ -133,6 +142,11 @@
         game = game
     }
 
+    function playStockfishMove(move: string) {
+        playMove(game, move)
+        setSelectableSquares()
+    }
+
     function rankIndex(rank: number) {
         if (game.playerColor == 'w') {
             return 7 - rank
@@ -144,6 +158,7 @@
     $: console.log(game)
 
     onMount(() => {
+        game.stockfish.init()
         initializeStateFromFEN(game)
         setSelectableSquares()
     })
