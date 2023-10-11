@@ -6,13 +6,7 @@
     import { onMount } from 'svelte'
     import { page } from '$app/stores'
     import { initializeStateFromFEN, playMove } from '$lib/ForsythEdwardsNotation'
-	import { executeMove } from '$lib/Move'
-	import { pawnMoves } from '$lib/PawnMoves'
-	import { knightMoves } from '$lib/KnightMoves'
-	import { bishopMoves } from '$lib/BishopMoves'
-	import { rookMoves } from '$lib/RookMoves'
-	import { queenMoves } from '$lib/QueenMoves'
-	import { kingMoves } from '$lib/KingMoves'
+	import { executeMove, calculateMoveDestinationSquares } from '$lib/Move'
 
     let game = new GameState($page.url.searchParams.get('playerColor') || 'w',
                              parseInt($page.url.searchParams.get('skillLevel') || '1'))
@@ -57,7 +51,7 @@
         square.selected = true
 
         /* Show the possible moves */
-        const moveDestinationSquares = filterForCheck(calculateMoveDestinationSquares(square))
+        const moveDestinationSquares = filterForCheck(calculateMoveDestinationSquares(game, square))
         setMoveDestinationSquares(moveDestinationSquares)
     }
 
@@ -88,37 +82,6 @@
         }
 
         return null
-    }
-
-    function calculateMoveDestinationSquares(square: SquareState): Array<SquareState> {
-        switch (square.piece) {
-            case 'P':
-            case 'p':
-                return pawnMoves(game, square)
-
-            case 'N':
-            case 'n':
-                return knightMoves(game, square)
-
-            case 'B':
-            case 'b':
-                return bishopMoves(game, square)
-
-            case 'R':
-            case 'r':
-                return rookMoves(game, square)
-
-            case 'Q':
-            case 'q':
-                return queenMoves(game, square)
-
-            case 'K':
-            case 'k':
-                return kingMoves(game, square)
-
-            default:
-                return []
-        }
     }
 
     function filterForCheck(moveDestinationSquares: Array<SquareState>): Array<SquareState> {

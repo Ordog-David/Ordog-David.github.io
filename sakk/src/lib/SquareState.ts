@@ -5,6 +5,7 @@ export class SquareState {
     clickable: boolean = false
     selected: boolean = false
     moveDestination: boolean = false
+    checked: boolean = false
 
     constructor(rank: number, file: number) {
         this.rank = rank

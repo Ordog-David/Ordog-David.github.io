@@ -3,6 +3,7 @@
     export let clickable: boolean
     export let selected: boolean
     export let moveDestination: boolean
+    export let checked: boolean
     export let rank: number
     export let file: number
 
@@ -36,7 +37,7 @@
 </script>
 
 <td class={color} class:clickable={clickable} class:selected={selected} class:moveDestination={moveDestination}
-    data-rank={rank} data-file={file} on:click>{figure}</td>
+    class:checked={checked} data-rank={rank} data-file={file} on:click>{figure}</td>
 
 <style>
     td {
@@ -75,6 +76,9 @@
     }
     td.selected {
         background-color: #7A1B7A !important;        
+    }
+    td.checked {
+        color: red;
     }
     td.moveDestination {
         background-color: rgb(254,178,4) !important;

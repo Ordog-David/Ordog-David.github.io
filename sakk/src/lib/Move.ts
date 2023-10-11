@@ -1,6 +1,13 @@
-import { getSquare } from "./Common"
 import type { GameState } from "./GameState"
 import type { SquareState } from "./SquareState"
+
+import { getSquare } from "./Common"
+import { pawnMoves } from './PawnMoves'
+import { knightMoves } from './KnightMoves'
+import { bishopMoves } from './BishopMoves'
+import { rookMoves } from './RookMoves'
+import { queenMoves } from './QueenMoves'
+import { kingMoves } from './KingMoves'
 
 export function executeMove(game: GameState, from: SquareState, to: SquareState, promotion: string): void {
     if (from.piece === null) {
@@ -30,7 +37,7 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
 
     game.fenMoves.push(createFenMove(from, to, promotion))
 
-    // TODO: Check
+    checkForCheck(game, game.activeColor)
     // TODO: Checkmate
 
     game.activeColor = game.activeColor === 'w' ? 'b' : 'w'
@@ -108,6 +115,74 @@ function possiblyPromote(piece: string, promotion: string): string {
     }
 
     return promotion.toUpperCase()
+}
+
+function checkForCheck(game: GameState, activeColor: string): boolean {
+    const opponentKing = activeColor == 'w' ? 'k' : 'K'
+    const opponentKingSquare = findPiece(game, opponentKing)
+    if (opponentKingSquare === null) {
+        throw new Error("No king? WTF?")
+    }
+
+    for (let r = 0; r < 8; r++) {
+        for (let f = 0; f < 8; f++) {
+            const square = game.squares[r][f]
+            if (square.pieceColor() === activeColor) {
+                const moveDestinationSquares = calculateMoveDestinationSquares(game, square)
+                if (moveDestinationSquares.includes(opponentKingSquare)) {
+                    opponentKingSquare.checked = true
+                    return true
+                }
+            }
+        }
+    }
+
+    opponentKingSquare.checked = false
+    return false
+}
+
+function findPiece(game: GameState, piece: string): SquareState | null {
+    for (let r = 0; r < 8; r++) {
+        for (let f = 0; f < 8; f++) {
+            const square = game.squares[r][f]
+            if (square.piece == piece) {
+                return square
+            }
+        }
+    }
+
+    return null
+}
+
+export function calculateMoveDestinationSquares(game: GameState, square: SquareState): Array<SquareState> {
+    switch (square.piece) {
+        case 'P':
+        case 'p':
+            return pawnMoves(game, square)
+
+        case 'N':
+        case 'n':
+            return knightMoves(game, square)
+
+        case 'B':
+        case 'b':
+            return bishopMoves(game, square)
+
+        case 'R':
+        case 'r':
+            return rookMoves(game, square)
+
+        case 'Q':
+        case 'q':
+            return queenMoves(game, square)
+
+        case 'K':
+        case 'k':
+            return kingMoves(game, square)
+
+        default:
+            return []
+    }
 }
 
 function createFenMove(from: SquareState, to: SquareState, promotion: string): string {
