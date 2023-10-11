@@ -11,10 +11,10 @@ export class GameState {
     fenStartingPosition: string = ''
     fenMoves: Array<string> = new Array()
 
-    constructor(playerColor: string) {
+    constructor(playerColor: string, skillLevel: number) {
         this.squares = this.createSquares()
         this.playerColor = playerColor
-        this.stockfish = new Stockfish(4000, 20)
+        this.stockfish = new Stockfish(skillLevel)
     }
 
     createSquares(): Array<Array<SquareState>> {

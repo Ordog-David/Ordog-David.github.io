@@ -1,21 +1,55 @@
+<script>
+    import { goto } from '$app/navigation';
+
+    let kezdokodMutat = false
+    let skillLevel = 1
+    let playerColor = false
+    let startingPosition = ''
+
+    function startGame() {
+        let parameters = "playerColor=" + (playerColor ? "b" : "w") + "&" +
+                         "skillLevel=" + skillLevel
+        if (startingPosition !== '') {
+            parameters += "&startingPosition=" + startingPosition
+        }
+        goto('/ChessBoard?' + parameters)
+    }
+
+    function kezdokodRejtes() {
+        const kodinput = document.getElementById("kezdokodGombok")
+        if(kezdokodMutat == false && kodinput != null) {
+            kezdokodMutat = true
+            kodinput.style.visibility = "visible"
+        }
+        else if(kodinput != null) {
+            kezdokodMutat = false
+            kodinput.style.visibility = "hidden"
+        }
+    }
+</script>
+
 <h1>C      H      E      S      S</h1>
 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;">
-    <p style="padding: 8px">Ínválasztás:</p>
+    <p style="padding: 8px">Színválasztás:</p>
     <label class="switch">
-            <input type="checkbox" id="switch">
+            <input type="checkbox" bind:checked={playerColor}>
             <span class="slider round"></span>
     </label>
+</div>
+<div style="padding: 20px;">
+    <label for="skillLevel">Nehézség</label>
+    <input type="number" bind:value={skillLevel} name="skillLevel" min="0" max="20">
 </div>
 
 <!--
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 -->
-<button class="button" on:click={printx}>Új játék</button>
+<button class="button" on:click={startGame}>Új játék</button>
 <button class="button" on:click={kezdokodRejtes}>Kezdőkód megadása</button>
 <div id= "kezdokodGombok">
     <div style="padding: 50px">
         <label for="kezdoPozicio">Kezdőpozíció</label>
-        <input type="string" id="kezdoPozicio" name="kezdoPozicio">
+        <input type="string" bind:value={startingPosition} name="kezdoPozicio">
     </div>
     <button class="confirmButton">Kezdőpozíció betöltése</button>
 </div>
@@ -115,23 +149,3 @@
         visibility: hidden;
     }
 </style>
-
-<script>
-    import { goto } from '$app/navigation';
-
-    let kezdokodMutat = false
-
-    function printx() {
-        goto('/ChessBoard')
-    }
-    function kezdokodRejtes() {
-        if(kezdokodMutat == false) {
-            kezdokodMutat = true
-            document.getElementById("kezdokodGombok").style.visibility = "visible"
-        }
-        else {
-            kezdokodMutat = false
-            document.getElementById("kezdokodGombok").style.visibility = "hidden"
-        }
-    }
-</script>

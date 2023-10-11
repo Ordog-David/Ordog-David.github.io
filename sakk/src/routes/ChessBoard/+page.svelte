@@ -4,6 +4,7 @@
     import Rank from './Rank.svelte'
 
     import { onMount } from 'svelte'
+    import { page } from '$app/stores'
     import { initializeStateFromFEN, playMove } from '$lib/ForsythEdwardsNotation'
 	import { executeMove } from '$lib/Move'
 	import { pawnMoves } from '$lib/PawnMoves'
@@ -13,7 +14,8 @@
 	import { queenMoves } from '$lib/QueenMoves'
 	import { kingMoves } from '$lib/KingMoves'
 
-    let game = new GameState("w")
+    let game = new GameState($page.url.searchParams.get('playerColor') || 'w',
+                             parseInt($page.url.searchParams.get('skillLevel') || '1'))
 
     function onSquareClick(event: MouseEvent) {
         const target = event.target as HTMLTableCellElement
@@ -153,9 +155,8 @@
     $: console.log(game)
 
     onMount(() => {
-        game.stockfish.init()
-        initializeStateFromFEN(game)
-        setSelectableSquares()
+        initializeStateFromFEN(game, $page.url.searchParams.get('startingPosition'))
+        game.stockfish.init().then(() => setSelectableSquares())
     })
 </script>
 

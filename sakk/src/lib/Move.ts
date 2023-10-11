@@ -1,4 +1,4 @@
-import { getRelativeSquare, getSquare } from "./Common"
+import { getSquare } from "./Common"
 import type { GameState } from "./GameState"
 import type { SquareState } from "./SquareState"
 

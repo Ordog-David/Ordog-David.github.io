@@ -8,15 +8,13 @@ enum State {
 export class Stockfish {
     state: State = State.Uninitialised
     stockfish: Worker | null = null
-    moveTime: number
-    depth: number
+    skillLevel: number
 
     onInitCompleted: (() => void) | null = null
     onBestMoveReceived: ((move: string) => void) | null = null
 
-    constructor(moveTime: number, depth: number) {
-        this.moveTime = moveTime;
-        this.depth = depth;
+    constructor(skillLevel: number) {
+        this.skillLevel = skillLevel
     }
 
     postMessage(message: string) {
@@ -26,14 +24,16 @@ export class Stockfish {
 
     // Callback when receiving UCI messages from Stockfish.
     onMessageReceived({ data }: { data: string }): void {
-        if (this.onInitCompleted && data === 'uciok' ) {
+        const message = data
+
+        console.log("stockfish -> ui: " + message)
+        if (this.onInitCompleted && message === 'uciok' ) {
             this.onInitCompleted();
         }
 
-        if (this.onBestMoveReceived && data.slice(0, 8) === 'bestmove' ) {
-            this.onBestMoveReceived(data);
+        if (this.onBestMoveReceived && message.slice(0, 8) === 'bestmove' ) {
+            this.onBestMoveReceived(message);
         }
-        console.log("stockfish -> ui: " + data)
     }
 
     // Initialise Stockfish. Resolve promise after receiving uciok.
@@ -49,6 +49,7 @@ export class Stockfish {
                 if (this.state === State.Initialising) {
                     this.state = State.Waiting;
                     this.onInitCompleted = null;
+                    this.postMessage('setoption name Skill Level value ' + this.skillLevel)
                     resolve();
                 }
             };
@@ -70,7 +71,7 @@ export class Stockfish {
                 resolve(message.split(' ')[1]);
             };
             this.postMessage('position fen ' + fen);
-            this.postMessage(`go depth ${this.depth} movetime ${this.moveTime}`);
+            this.postMessage('go');
         });
     }
 }
