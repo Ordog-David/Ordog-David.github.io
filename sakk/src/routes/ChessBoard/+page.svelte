@@ -1,6 +1,7 @@
 <script lang="ts">
     import { GameState } from '$lib/GameState'
     import type { SquareState } from '$lib/SquareState'
+    import { Stockfish } from '$lib/Stockfish';
     import Rank from './Rank.svelte'
 
     import { onMount } from 'svelte'
@@ -9,7 +10,7 @@
 	import { executeMove, calculateMoveDestinationSquares } from '$lib/Move'
 
     let game = new GameState($page.url.searchParams.get('playerColor') || 'w',
-                             parseInt($page.url.searchParams.get('skillLevel') || '1'))
+                             new Stockfish(parseInt($page.url.searchParams.get('skillLevel') || '1')))
 
     function onSquareClick(event: MouseEvent) {
         const target = event.target as HTMLTableCellElement
@@ -66,7 +67,7 @@
         }
 
         if (game.playerColor !== game.activeColor) {
-            game.stockfish.getMove(game.getFen()).then((move) => playStockfishMove(move))
+            game.stockfish?.getMove(game.getFen()).then((move) => playStockfishMove(move))
         }
 
         game = game
@@ -119,7 +120,7 @@
 
     onMount(() => {
         initializeStateFromFEN(game, $page.url.searchParams.get('startingPosition'))
-        game.stockfish.init().then(() => setSelectableSquares())
+        game.stockfish!.init().then(() => setSelectableSquares())
     })
 </script>
 

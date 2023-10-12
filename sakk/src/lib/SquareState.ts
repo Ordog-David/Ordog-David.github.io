@@ -23,4 +23,14 @@ export class SquareState {
 
         return 'w'
     }
+
+    clone(): SquareState {
+        const cloned = new SquareState(this.rank, this.file)
+        cloned.piece = this.piece
+        cloned.clickable = this.clickable
+        cloned.selected = this.selected
+        cloned.moveDestination = this.moveDestination
+        cloned.checked = this.checked
+        return cloned
+    }
 }
