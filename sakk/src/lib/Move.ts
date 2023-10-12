@@ -117,6 +117,14 @@ function possiblyPromote(piece: string, promotion: string): string {
     return promotion.toUpperCase()
 }
 
+export function checkForEndOfGame(game: GameState): boolean {
+    if (checkForCheck(game, game.activeColor)) {
+        return checkForCheckmate(game)
+    }
+
+    return false
+}
+
 function checkForCheck(game: GameState, activeColor: string): boolean {
     const opponentKing = activeColor == 'w' ? 'k' : 'K'
     const opponentKingSquare = findPiece(game, opponentKing)
@@ -139,6 +147,33 @@ function checkForCheck(game: GameState, activeColor: string): boolean {
 
     opponentKingSquare.checked = false
     return false
+}
+
+function checkForCheckmate(game: GameState): boolean {
+    console.log("check for checkmate")
+    const opponentColor = game.activeColor == 'w' ? 'b' : 'w'
+
+    for (let r = 0; r < 8; r++) {
+        for (let f = 0; f < 8; f++) {
+            const square = game.squares[r][f]
+            if (square.pieceColor() === opponentColor) {
+                const moveDestinationSquares = calculateMoveDestinationSquares(game, square)
+                for (const moveDestinationSquare of moveDestinationSquares) {
+                    const clonedGame = game.clone()
+                    const clonedSquare = clonedGame.squares[square.rank][square.file]
+                    const clonedMoveDestinationSquare =
+                        clonedGame.squares[moveDestinationSquare.rank][moveDestinationSquare.file]
+                    executeMove(clonedGame, clonedSquare, clonedMoveDestinationSquare, '')
+                    if (!checkForCheck(clonedGame, game.activeColor)) {
+                        return false
+                    }
+                }
+            }
+        }
+
+    }
+
+    return true
 }
 
 function findPiece(game: GameState, piece: string): SquareState | null {

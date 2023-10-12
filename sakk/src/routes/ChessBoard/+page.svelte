@@ -7,7 +7,7 @@
     import { onMount } from 'svelte'
     import { page } from '$app/stores'
     import { initializeStateFromFEN, playMove } from '$lib/ForsythEdwardsNotation'
-    import { calculateMoveDestinationSquaresFilteredForCheck, executeMove } from '$lib/Move'
+    import { calculateMoveDestinationSquaresFilteredForCheck, checkForEndOfGame, executeMove } from '$lib/Move'
 
     let game = new GameState($page.url.searchParams.get('playerColor') || 'w',
                              new Stockfish(parseInt($page.url.searchParams.get('skillLevel') || '1')))
@@ -63,6 +63,14 @@
                 square.selected = false
                 square.clickable = game.playerColor === game.activeColor && game.playerColor === square.pieceColor()
                 square.moveDestination = false
+            }
+        }
+
+        if (checkForEndOfGame(game)) {
+            if (game.playerColor === game.activeColor) {
+                alert("Nyertél")
+            } else {
+                alert("vesztettél")
             }
         }
 
