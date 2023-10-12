@@ -140,8 +140,8 @@
     <Rank squares={game.squares[rankIndex(7)]} playerColor={game.playerColor} on:click={onSquareClick} />
 </table>
 
-<div style="text-align: right; text-align: bottom;">
-    <img src="images/opponent.png" alt="Ellenfél" />
+<div class="martin" style="text-align: right; text-align: bottom;">
+    <!--<img src="images/opponent.png" alt="Ellenfél" />-->
 </div>
 
 <style>
