@@ -3,8 +3,8 @@ import type { SquareState } from "./SquareState"
 import { getRelativeSquare } from "./Common"
 
 export function pawnMoves(game: GameState, square: SquareState): Array<SquareState> {
-    const opponentColor = game.playerColor === 'w' ? 'b' : 'w'
-    const dRank = game.playerColor === 'w' ? 1 : -1
+    const opponentColor = game.activeColor === 'w' ? 'b' : 'w'
+    const dRank = game.activeColor === 'w' ? 1 : -1
     const moveDestinationSquares = []
 
     const aboveSquare = getRelativeSquare(game, square, dRank, 0)
@@ -12,7 +12,7 @@ export function pawnMoves(game: GameState, square: SquareState): Array<SquareSta
         moveDestinationSquares.push(aboveSquare)
     }
 
-    if ((game.playerColor === 'w' && square.rank === 1) || (game.playerColor === 'b' && square.rank === 6)) {
+    if ((game.activeColor === 'w' && square.rank === 1) || (game.activeColor === 'b' && square.rank === 6)) {
         const aboveAboveSquare = getRelativeSquare(game, square, 2 * dRank, 0)
         if (aboveSquare != null && aboveSquare.piece === null &&
             aboveAboveSquare != null && aboveAboveSquare.piece === null) {
