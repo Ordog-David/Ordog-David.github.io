@@ -7,7 +7,7 @@
     import { onMount } from 'svelte'
     import { page } from '$app/stores'
     import { initializeStateFromFEN, playMove } from '$lib/ForsythEdwardsNotation'
-	import { executeMove, calculateMoveDestinationSquares } from '$lib/Move'
+    import { calculateMoveDestinationSquaresFilteredForCheck, executeMove } from '$lib/Move'
 
     let game = new GameState($page.url.searchParams.get('playerColor') || 'w',
                              new Stockfish(parseInt($page.url.searchParams.get('skillLevel') || '1')))
@@ -52,7 +52,7 @@
         square.selected = true
 
         /* Show the possible moves */
-        const moveDestinationSquares = filterForCheck(calculateMoveDestinationSquares(game, square))
+        const moveDestinationSquares = calculateMoveDestinationSquaresFilteredForCheck(game, square)
         setMoveDestinationSquares(moveDestinationSquares)
     }
 
@@ -83,11 +83,6 @@
         }
 
         return null
-    }
-
-    function filterForCheck(moveDestinationSquares: Array<SquareState>): Array<SquareState> {
-        // TODO: Filter moves which would result in a check
-        return moveDestinationSquares
     }
 
     function setMoveDestinationSquares(moveDestinationSquares: Array<SquareState>): void {
