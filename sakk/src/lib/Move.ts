@@ -177,6 +177,12 @@ function checkForCheck(game: GameState, activeColor: string): boolean {
 
     for (let r = 0; r < 8; r++) {
         for (let f = 0; f < 8; f++) {
+            game.squares[r][f].checked = false
+        }
+    }
+
+    for (let r = 0; r < 8; r++) {
+        for (let f = 0; f < 8; f++) {
             const square = game.squares[r][f]
             if (square.pieceColor() === activeColor) {
                 const moveDestinationSquares = calculateMoveDestinationSquares(game, square)
@@ -188,7 +194,6 @@ function checkForCheck(game: GameState, activeColor: string): boolean {
         }
     }
 
-    opponentKingSquare.checked = false
     return false
 }
 
