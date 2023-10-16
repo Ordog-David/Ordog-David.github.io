@@ -160,9 +160,8 @@ function checkForCheckmate(game: GameState): boolean {
                 const moveDestinationSquares = calculateMoveDestinationSquares(game, square)
                 for (const moveDestinationSquare of moveDestinationSquares) {
                     const clonedGame = game.clone()
-                    const clonedSquare = clonedGame.squares[square.rank][square.file]
-                    const clonedMoveDestinationSquare =
-                        clonedGame.squares[moveDestinationSquare.rank][moveDestinationSquare.file]
+                    const clonedSquare = clonedGame.getSquare(square)
+                    const clonedMoveDestinationSquare = clonedGame.getSquare(moveDestinationSquare)
                     executeMove(clonedGame, clonedSquare, clonedMoveDestinationSquare, '')
                     if (!checkForCheck(clonedGame, game.activeColor)) {
                         return false
