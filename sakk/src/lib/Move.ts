@@ -46,15 +46,15 @@ function calculateMoveDestinationSquares(game: GameState, square: SquareState): 
 
 function filterForCheck(game: GameState, square: SquareState,
                         moveDestinationSquares: Array<SquareState>): Array<SquareState> {
-    return moveDestinationSquares.filter(moveDestinationSquare => filterForCheckMove(game, square, moveDestinationSquare))
+    return moveDestinationSquares.filter(moveDestinationSquare => !isCheckMove(game, square, moveDestinationSquare))
 }
 
-function filterForCheckMove(game: GameState, square: SquareState, moveDestinationSquare: SquareState): boolean {
+export function isCheckMove(game: GameState, square: SquareState, moveDestinationSquare: SquareState): boolean {
     const clonedGame = game.clone()
     const clonedSquare = clonedGame.getSquare(square)
     const clonedMoveDestinationSquare = clonedGame.getSquare(moveDestinationSquare)
     executeMove(clonedGame, clonedSquare, clonedMoveDestinationSquare, '')
-    return !checkForCheck(clonedGame, game.getInactiveColor())
+    return checkForCheck(clonedGame, game.getInactiveColor())
 }
 
 export function executeMove(game: GameState, from: SquareState, to: SquareState, promotion: string): void {
