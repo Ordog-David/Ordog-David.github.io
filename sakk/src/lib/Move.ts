@@ -62,6 +62,8 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
         throw new Error("There must be a piece at the starting coordinate")
     }
 
+    // TODO: Pawn promotion
+
     /* Check if the current move is an en passant */
     if (to === game.enPassantTargetSquare) {
         executeEnPassant(game, from, to)
@@ -69,8 +71,6 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
 
     /* Check if the current move creates a chance for en passant */
     checkForEnPassant(game, from, to)
-
-    // TODO: Pawn promotion
 
     /* Check if the current move is a castling */
     if (from.piece.toLowerCase() === 'k' && Math.abs(from.file - to.file) == 2) {
