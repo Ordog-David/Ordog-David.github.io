@@ -45,6 +45,10 @@ export class GameState {
         return this.squares[square.rank][square.file]
     }
 
+    getInactiveColor(): string {
+        return this.activeColor === 'w' ? 'b' : 'w'
+    }
+
     clone(): GameState {
         const cloned = new GameState(this.playerColor, null)
 

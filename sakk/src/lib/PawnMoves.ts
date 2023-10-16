@@ -3,7 +3,6 @@ import type { SquareState } from "./SquareState"
 import { getRelativeSquare } from "./Common"
 
 export function pawnMoves(game: GameState, square: SquareState): Array<SquareState> {
-    const opponentColor = game.activeColor === 'w' ? 'b' : 'w'
     const dRank = game.activeColor === 'w' ? 1 : -1
     const moveDestinationSquares = []
 
@@ -21,17 +20,16 @@ export function pawnMoves(game: GameState, square: SquareState): Array<SquareSta
     }
 
     const aboveLeftSquare = getRelativeSquare(game, square, dRank, -1)
-    checkCapture(game, aboveLeftSquare, opponentColor, moveDestinationSquares)
+    checkCapture(game, aboveLeftSquare, moveDestinationSquares)
 
     const aboveRightSquare = getRelativeSquare(game, square, dRank, 1)
-    checkCapture(game, aboveRightSquare, opponentColor, moveDestinationSquares)
+    checkCapture(game, aboveRightSquare, moveDestinationSquares)
 
     return moveDestinationSquares
 }
 
-function checkCapture(game: GameState, square: SquareState | null, opponentColor: String,
-                      moveDestinationSquares: Array<SquareState>): void {
-    if (square != null && square.pieceColor() === opponentColor) {
+function checkCapture(game: GameState, square: SquareState | null, moveDestinationSquares: Array<SquareState>): void {
+    if (square != null && square.pieceColor() === game.getInactiveColor()) {
         moveDestinationSquares.push(square)
     } else if (square != null && square === game.enPassantTargetSquare) {
         moveDestinationSquares.push(square)

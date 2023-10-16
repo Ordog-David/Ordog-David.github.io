@@ -24,7 +24,7 @@ export function checkMove(game: GameState, square: SquareState, dRank: number, d
 
 export function checkMoves(game: GameState, square: SquareState, dRank: number, dFile: number,
                            moveDestinationSquares: Array<SquareState>): void {
-    const opponentColor = square.pieceColor() == 'w' ? 'b' : 'w'
+    const opponentColor = square.pieceColor() === 'w' ? 'b' : 'w'
     for (let n = 1; n < 8; n++) {
         const destinationSquare = getRelativeSquare(game, square, n * dRank, n * dFile)
         if (destinationSquare === null || destinationSquare.pieceColor() === square.pieceColor()) {

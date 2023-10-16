@@ -40,7 +40,7 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
     checkForCheck(game, game.activeColor)
     // TODO: Checkmate
 
-    game.activeColor = game.activeColor === 'w' ? 'b' : 'w'
+    game.activeColor = game.getInactiveColor()
 }
 
 function executeEnPassant(game: GameState, from: SquareState, to: SquareState): void {
@@ -150,13 +150,10 @@ function checkForCheck(game: GameState, activeColor: string): boolean {
 }
 
 function checkForCheckmate(game: GameState): boolean {
-    console.log("check for checkmate")
-    const opponentColor = game.activeColor == 'w' ? 'b' : 'w'
-
     for (let r = 0; r < 8; r++) {
         for (let f = 0; f < 8; f++) {
             const square = game.squares[r][f]
-            if (square.pieceColor() === opponentColor) {
+            if (square.pieceColor() === game.getInactiveColor()) {
                 const moveDestinationSquares = calculateMoveDestinationSquares(game, square)
                 for (const moveDestinationSquare of moveDestinationSquares) {
                     const clonedGame = game.clone()
