@@ -9,6 +9,54 @@ import { rookMoves } from './RookMoves'
 import { queenMoves } from './QueenMoves'
 import { kingMoves } from './KingMoves'
 
+export function calculateMoveDestinationSquaresFilteredForCheck(game: GameState, square: SquareState): Array<SquareState> {
+    return filterForCheck(game, square, calculateMoveDestinationSquares(game, square))
+}
+
+function calculateMoveDestinationSquares(game: GameState, square: SquareState): Array<SquareState> {
+    switch (square.piece) {
+        case 'P':
+        case 'p':
+            return pawnMoves(game, square)
+
+        case 'N':
+        case 'n':
+            return knightMoves(game, square)
+
+        case 'B':
+        case 'b':
+            return bishopMoves(game, square)
+
+        case 'R':
+        case 'r':
+            return rookMoves(game, square)
+
+        case 'Q':
+        case 'q':
+            return queenMoves(game, square)
+
+        case 'K':
+        case 'k':
+            return kingMoves(game, square)
+
+        default:
+            return []
+    }
+}
+
+function filterForCheck(game: GameState, square: SquareState,
+                        moveDestinationSquares: Array<SquareState>): Array<SquareState> {
+    return moveDestinationSquares.filter(moveDestinationSquare => filterForCheckMove(game, square, moveDestinationSquare))
+}
+
+function filterForCheckMove(game: GameState, square: SquareState, moveDestinationSquare: SquareState): boolean {
+    const clonedGame = game.clone()
+    const clonedSquare = clonedGame.getSquare(square)
+    const clonedMoveDestinationSquare = clonedGame.getSquare(moveDestinationSquare)
+    executeMove(clonedGame, clonedSquare, clonedMoveDestinationSquare, '')
+    return !checkForCheck(clonedGame, game.getInactiveColor())
+}
+
 export function executeMove(game: GameState, from: SquareState, to: SquareState, promotion: string): void {
     if (from.piece === null) {
         throw new Error("There must be a piece at the starting coordinate")
@@ -36,11 +84,6 @@ export function executeMove(game: GameState, from: SquareState, to: SquareState,
     from.piece = null
 
     game.fenMoves.push(createFenMove(from, to, promotion))
-
-    checkForCheck(game, game.activeColor)
-    // TODO: Checkmate
-
-    game.activeColor = game.getInactiveColor()
 }
 
 function executeEnPassant(game: GameState, from: SquareState, to: SquareState): void {
@@ -185,52 +228,8 @@ function findPiece(game: GameState, piece: string): SquareState | null {
     return null
 }
 
-export function calculateMoveDestinationSquaresFilteredForCheck(game: GameState, square: SquareState): Array<SquareState> {
-    return filterForCheck(game, square, calculateMoveDestinationSquares(game, square))
-}
-
-function calculateMoveDestinationSquares(game: GameState, square: SquareState): Array<SquareState> {
-    switch (square.piece) {
-        case 'P':
-        case 'p':
-            return pawnMoves(game, square)
-
-        case 'N':
-        case 'n':
-            return knightMoves(game, square)
-
-        case 'B':
-        case 'b':
-            return bishopMoves(game, square)
-
-        case 'R':
-        case 'r':
-            return rookMoves(game, square)
-
-        case 'Q':
-        case 'q':
-            return queenMoves(game, square)
-
-        case 'K':
-        case 'k':
-            return kingMoves(game, square)
-
-        default:
-            return []
-    }
-}
-
-function filterForCheck(game: GameState, square: SquareState,
-                        moveDestinationSquares: Array<SquareState>): Array<SquareState> {
-    return moveDestinationSquares.filter(moveDestinationSquare => filterForCheckMove(game, square, moveDestinationSquare))
-}
-
-function filterForCheckMove(game: GameState, square: SquareState, moveDestinationSquare: SquareState): boolean {
-    const clonedGame = game.clone()
-    const clonedSquare = clonedGame.getSquare(square)
-    const clonedMoveDestinationSquare = clonedGame.getSquare(moveDestinationSquare)
-    executeMove(clonedGame, clonedSquare, clonedMoveDestinationSquare, '')
-    return !checkForCheck(clonedGame, game.activeColor === 'w' ? 'b' : 'w')
+export function toggleActiveColor(game: GameState): void {
+    game.activeColor = game.getInactiveColor()
 }
 
 function createFenMove(from: SquareState, to: SquareState, promotion: string): string {

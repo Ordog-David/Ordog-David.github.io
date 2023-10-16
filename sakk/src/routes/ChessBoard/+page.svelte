@@ -7,7 +7,8 @@
     import { onMount } from 'svelte'
     import { page } from '$app/stores'
     import { initializeStateFromFEN, playMove } from '$lib/ForsythEdwardsNotation'
-    import { calculateMoveDestinationSquaresFilteredForCheck, checkForEndOfGame, executeMove } from '$lib/Move'
+    import { calculateMoveDestinationSquaresFilteredForCheck, checkForEndOfGame, executeMove,
+             toggleActiveColor } from '$lib/Move'
 
     let game = new GameState($page.url.searchParams.get('playerColor') || 'w',
                              new Stockfish(parseInt($page.url.searchParams.get('skillLevel') || '1')))
@@ -41,7 +42,9 @@
         /* If the square is a valid destination, then move the piece */
         if (square.moveDestination && selectedSquare !== null) {
             executeMove(game, selectedSquare, square, '')
-            setSelectableSquares()
+            prepareNextMove()
+            /* It is now Stockfish's move */
+            game.stockfish?.getMove(game.getFen()).then((move) => playStockfishMove(move))
             return
         }
 
@@ -56,16 +59,12 @@
         setMoveDestinationSquares(moveDestinationSquares)
     }
 
-    function setSelectableSquares(): void {
-        for (let rank = 0; rank < 8; rank++) {
-            for (let file = 0; file < 8; file++) {
-                const square = game.squares[rank][file]
-                square.selected = false
-                square.clickable = game.playerColor === game.activeColor && game.playerColor === square.pieceColor()
-                square.moveDestination = false
-            }
-        }
+    function playStockfishMove(move: string) {
+        playMove(game, move)
+        prepareNextMove()
+    }
 
+    function prepareNextMove() {
         if (checkForEndOfGame(game)) {
             if (game.playerColor === game.activeColor) {
                 alert("Nyertél")
@@ -74,8 +73,19 @@
             }
         }
 
-        if (game.playerColor !== game.activeColor) {
-            game.stockfish?.getMove(game.getFen()).then((move) => playStockfishMove(move))
+        toggleActiveColor(game)
+
+        setSelectableSquares()
+    }
+
+    function setSelectableSquares(): void {
+        for (let rank = 0; rank < 8; rank++) {
+            for (let file = 0; file < 8; file++) {
+                const square = game.squares[rank][file]
+                square.selected = false
+                square.clickable = game.playerColor === game.activeColor && game.playerColor === square.pieceColor()
+                square.moveDestination = false
+            }
         }
 
         game = game
@@ -104,11 +114,6 @@
         }
 
         game = game
-    }
-
-    function playStockfishMove(move: string) {
-        playMove(game, move)
-        setSelectableSquares()
     }
 
     function rankIndex(rank: number) {
