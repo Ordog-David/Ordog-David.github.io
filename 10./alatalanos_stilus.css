@@ -1,0 +1,24 @@
+body {
+    background-color: #7A1B7A;
+    margin: auto;
+}
+h1 {
+    text-align: center;
+    margin: 50px;
+    vertical-align: center;
+}
+p {
+    text-align: center;
+    padding: 10px;
+    border-width: 5px ;
+    border-style: hidden ;
+}
+
+a {
+    color: black;
+} 
+p:hover {
+    background-color: rgb(0, 0, 139, 0.8);
+    border-style: solid;
+    font-weight: 1000;
+}
