@@ -138,7 +138,7 @@ let numerikusBillentyuk = [
 /* ‎  */
 //ㅤ ㅤ 
 
-/*
+
 function crasher() {
   for (var j = 0; j < 4; j++) {
     visszaszamlalas = 3-j
@@ -148,12 +148,12 @@ function crasher() {
   for (var i = 5; i > 3; i = i + 1)
     {console.log(i); }
 }
-*/
+
 
 billentyuzet("billentyuzet", foBillentyuk);
 billentyuzet("billentyuzet", numerikusBillentyuk);
 
-/*
+
 let karmokodas = [
    "ILYEN EZ A POPSZAKMA",
   "FASZ",
@@ -200,4 +200,4 @@ let karmokodas = [
   "SUCK",
   "FAP",
 ]
-*/
+
