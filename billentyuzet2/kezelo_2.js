@@ -138,6 +138,7 @@ let numerikusBillentyuk = [
 /* ‎  */
 //ㅤ ㅤ 
 
+/*
 function crasher() {
   for (var j = 0; j < 4; j++) {
     visszaszamlalas = 3-j
@@ -197,3 +198,4 @@ let karmokodas = [
   "SUCK",
   "FAP",
 ]
+*/
